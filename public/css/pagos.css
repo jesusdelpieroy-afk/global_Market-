@@ -1,0 +1,96 @@
+/* Global Market — pagos con comprobante, código de recojo y verificación en tienda */
+
+/* ---------- Tienda: pago ---------- */
+.pay-methods { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.pay-method {
+  display: flex; gap: .75rem; align-items: center; padding: .7rem; border: 1px solid var(--gm-line, #e6e8ee);
+  border-radius: .9rem; background: #fff;
+}
+.pay-method img { width: 88px; height: 88px; border-radius: .6rem; object-fit: cover; cursor: zoom-in; flex: none; border: 1px solid var(--gm-line, #e6e8ee); }
+.pay-method b { display: block; font-size: .92rem; }
+.pay-method small { display: block; color: var(--gm-muted, #6c7380); line-height: 1.35; }
+.pay-method .num { font-weight: 700; color: var(--gm-ink, #17171a); font-size: .95rem; word-break: break-all; }
+.pay-copy { border: 0; background: none; color: var(--bs-primary); font-size: .78rem; font-weight: 600; padding: 0; cursor: pointer; }
+.pay-total { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; border-radius: .9rem; background: #fff7e0; font-weight: 800; }
+.pay-total span:last-child { font-size: 1.3rem; }
+.pay-steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 1rem; display: grid; gap: .35rem; font-size: .86rem; }
+.pay-steps li { counter-increment: s; display: flex; gap: .6rem; align-items: flex-start; }
+.pay-steps li::before {
+  content: counter(s); flex: none; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--bs-primary); color: #fff;
+  font-size: .75rem; font-weight: 700; display: grid; place-items: center; margin-top: .05rem;
+}
+.proof-drop { display: flex; gap: .9rem; align-items: center; padding: .8rem; border: 2px dashed var(--gm-line, #e6e8ee); border-radius: .9rem; background: #fafbfc; }
+.proof-drop img { width: 84px; height: 84px; object-fit: cover; border-radius: .7rem; background: #fff; flex: none; }
+.pay-error { display: none; padding: .7rem .9rem; border-radius: .7rem; background: #fdecec; color: #8a1217; font-size: .88rem; }
+.pay-error.show { display: block; }
+.pay-done { text-align: center; }
+.pay-done .code-pill { margin: .6rem auto; }
+.pay-done .qr { display: inline-block; padding: .5rem; background: #fff; border: 1px solid var(--gm-line, #e6e8ee); border-radius: .9rem; line-height: 0; }
+.pay-done .qr svg { width: 200px; height: 200px; max-width: 100%; }
+.last-ticket { font-size: .82rem; text-align: center; margin-bottom: .6rem; }
+
+/* ---------- Código (admin y tienda) ---------- */
+.code-pill {
+  display: block; width: fit-content; max-width: 100%; padding: .55rem 1rem; border-radius: .8rem; background: #17171a; color: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 1.35rem; font-weight: 700; letter-spacing: .08em;
+}
+.comprobante-img { width: 100%; max-height: 260px; object-fit: contain; border: 1px solid var(--gm-line, #e6e8ee); border-radius: .8rem; background: #fafbfc; }
+dl dt { font-weight: 600; color: var(--gm-muted, #6c7380); font-size: .74rem; text-transform: uppercase; letter-spacing: .03em; }
+dl dd { margin: 0 0 .55rem; }
+
+/* ---------- Panel: verificación ---------- */
+.verif-banner { display: flex; gap: 1rem; align-items: center; padding: 1.1rem 1.3rem; border-radius: 1.1rem; margin-bottom: 1.25rem; color: #fff; }
+.verif-banner i { font-size: 2.6rem; line-height: 1; flex: none; }
+.verif-banner h2 { font-size: 1.25rem; font-weight: 800; margin: 0; }
+.verif-banner p { margin: .15rem 0 0; opacity: .95; }
+.verif-banner.good { background: #198754; }
+.verif-banner.warn { background: #b7791f; }
+.verif-banner.bad { background: #c0262d; }
+.qty-big { display: inline-grid; place-items: center; min-width: 2.2rem; height: 2.2rem; border-radius: .6rem; background: #17171a; color: #fff; font-weight: 800; }
+.scan-box { position: relative; margin-top: .8rem; border-radius: 1rem; overflow: hidden; background: #000; aspect-ratio: 4/3; }
+.scan-box video { width: 100%; height: 100%; object-fit: cover; }
+.scan-frame { position: absolute; inset: 18%; border: 3px solid #fff; border-radius: 1rem; box-shadow: 0 0 0 999px rgba(0,0,0,.35); }
+
+/* ---------- Pase de recojo (ticket) ---------- */
+.ticket-body { background: #f3f4f7; min-height: 100vh; }
+.ticket-wrap { max-width: 460px; margin: 0 auto; padding: 1rem 1rem 3rem; }
+.ticket-back { display: inline-block; margin: .5rem 0 .8rem; color: var(--gm-muted, #6c7380); text-decoration: none; font-size: .9rem; }
+.ticket { background: #fff; border-radius: 1.2rem; box-shadow: 0 8px 30px rgba(20,24,40,.1); padding: 1.3rem; text-align: center; }
+.ticket-head { display: flex; align-items: center; gap: .7rem; text-align: left; margin-bottom: 1rem; }
+.ticket-head img { width: 42px; height: 42px; object-fit: contain; }
+.ticket-head b { display: block; } .ticket-head small { color: var(--gm-muted, #6c7380); }
+.ticket-state { padding: .6rem .8rem; border-radius: .8rem; font-weight: 700; font-size: .92rem; margin-bottom: 1rem; }
+.ticket-state.good { background: #e4f5ec; color: #14663f; }
+.ticket-state.warn { background: #fff3da; color: #8a5a00; }
+.ticket-state.bad { background: #fdecec; color: #8a1217; }
+.ticket-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 1.9rem; font-weight: 800; letter-spacing: .08em;
+  padding: .5rem 0; word-break: break-all;
+}
+.ticket-qr { display: inline-block; padding: .5rem; border: 1px solid var(--gm-line, #e6e8ee); border-radius: 1rem; line-height: 0; }
+.ticket-qr svg { width: 220px; height: 220px; max-width: 100%; }
+.ticket-help { font-size: .85rem; color: var(--gm-muted, #6c7380); margin: .9rem 0 1rem; }
+.ticket-items { list-style: none; padding: 0; margin: 0 0 1rem; text-align: left; border-top: 1px dashed #cfd3dc; }
+.ticket-items li { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px dashed #cfd3dc; font-size: .9rem; }
+.ticket-items li.total { font-weight: 800; font-size: 1rem; }
+.ticket-meta { text-align: left; display: grid; gap: .1rem; font-size: .88rem; margin-bottom: 1rem; }
+.ticket-meta dd { margin-bottom: .4rem; }
+.ticket-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+@media print {
+  .ticket-back, .ticket-actions { display: none !important; }
+  .ticket-body { background: #fff; }
+  .ticket { box-shadow: none; border: 1px solid #ccc; }
+}
+
+/* ---------- Barra fija de pago (tienda) ---------- */
+.pay-bar {
+  position: fixed; left: 12px; right: 12px; bottom: 88px; z-index: 1030; display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  padding: .6rem .7rem .6rem 1rem; border-radius: 1rem; background: #17171a; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+.pay-bar[hidden] { display: none; }
+.pay-bar b { display: block; font-size: .9rem; white-space: nowrap; } .pay-bar small { color: #f5b81c; font-weight: 700; }
+.pay-bar .btn { white-space: nowrap; font-size: .85rem; }
+@media (min-width: 576px) { .pay-bar { left: auto; right: 14px; width: 440px; } }
+@media (max-width: 420px) { .pay-bar .btn { font-size: .78rem; padding-inline: .6rem; } }
+/* el asistente virtual no tapa los botones del carrito */
+.gm-cart.show ~ .bot-fab, .gm-cart.show ~ .bot-tip { display: none; }

@@ -1,0 +1,43 @@
+<?php
+
+return [
+    'required' => 'El campo :attribute es obligatorio.',
+    'distinct' => 'El campo :attribute tiene un valor repetido.',
+    'mimes' => 'El campo :attribute debe ser un archivo de tipo: :values.',
+    'email' => 'El campo :attribute debe ser un correo válido.',
+    'numeric' => 'El campo :attribute debe ser un número.',
+    'integer' => 'El campo :attribute debe ser un número entero.',
+    'boolean' => 'El campo :attribute no es válido.',
+    'array' => 'El campo :attribute no es válido.',
+    'date' => 'El campo :attribute no es una fecha válida.',
+    'digits' => 'El campo :attribute debe tener :digits dígitos.',
+    'exists' => 'El valor elegido para :attribute no es válido.',
+    'in' => 'El valor elegido para :attribute no es válido.',
+    'image' => 'El archivo de :attribute debe ser una imagen.',
+    'confirmed' => 'La confirmación de :attribute no coincide.',
+    'digits_between' => 'El campo :attribute debe tener entre :min y :max dígitos.',
+    'unique' => 'Ese valor de :attribute ya está registrado.',
+    'max' => [
+        'string' => 'El campo :attribute no debe superar los :max caracteres.',
+        'numeric' => 'El campo :attribute no debe ser mayor que :max.',
+        'file' => 'El archivo de :attribute no debe pesar más de :max KB.',
+        'array' => 'El campo :attribute no debe tener más de :max elementos.',
+    ],
+    'min' => [
+        'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+        'numeric' => 'El campo :attribute debe ser al menos :min.',
+        'array' => 'El campo :attribute debe tener al menos :min elementos.',
+    ],
+    'attributes' => [
+        'nombre' => 'nombre', 'descripcion' => 'descripción', 'categoria_id' => 'categoría',
+        'precio' => 'precio', 'stock' => 'stock', 'imagen' => 'foto', 'titulo' => 'título',
+        'porcentaje' => 'descuento', 'vence' => 'fecha de vencimiento', 'telefono' => 'teléfono',
+        'name' => 'nombre', 'email' => 'correo', 'password' => 'contraseña', 'rol_id' => 'rol',
+        'pregunta' => 'pregunta', 'respuesta' => 'respuesta', 'whatsapp' => 'WhatsApp',
+        'moneda' => 'moneda', 'direccion' => 'dirección', 'horario' => 'horario',
+        'portada_titulo' => 'título', 'portada_texto' => 'texto',
+        'dni' => 'DNI', 'cliente_id' => 'cliente', 'user_id' => 'vendedor', 'estado' => 'estado',
+        'items' => 'productos', 'items.*.producto_id' => 'producto', 'items.*.cantidad' => 'cantidad',
+        'password_confirmation' => 'confirmación de la contraseña', 'search' => 'búsqueda',
+    ],
+];
